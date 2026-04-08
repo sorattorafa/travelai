@@ -1,0 +1,95 @@
+rules_version = '2';
+
+// Security rules para a coleção `usage/{deviceUuid}`.
+//
+// Regras-chave:
+// 1. Apenas usuários autenticados (inclui anon auth) podem ler/escrever.
+// 2. O doc pertence ao authUid atual: só o dono pode ler/atualizar.
+// 3. O cliente NUNCA pode modificar `isPremium` ou `premiumSince` —
+//    isso é exclusivo da Cloud Function `validateIAPReceipt` que usa
+//    Admin SDK e bypassa estas rules.
+// 4. Updates do cliente só podem:
+//    - Zerar ou incrementar `aiCallsToday`
+//    - Atualizar `dateKey` (para reset diário)
+//    - Atualizar `lastUpdated` e `authUid` (rotação do anon)
+// 5. O cliente não pode deletar o doc.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /usage/{deviceUuid} {
+
+      // --- READ ---
+      allow read: if request.auth != null
+                  && request.auth.uid == resource.data.authUid;
+
+      // --- CREATE ---
+      // Cliente cria o doc inicial. Deve começar com aiCallsToday=0,
+      // isPremium=false, e authUid == caller.
+      allow create: if request.auth != null
+                    && request.resource.data.authUid == request.auth.uid
+                    && request.resource.data.aiCallsToday == 0
+                    && request.resource.data.isPremium == false
+                    && request.resource.data.premiumSince == null
+                    && request.resource.data.keys().hasOnly([
+                         'authUid',
+                         'dateKey',
+                         'aiCallsToday',
+                         'isPremium',
+                         'premiumSince',
+                         'createdAt',
+                         'lastUpdated',
+                       ]);
+
+      // --- UPDATE ---
+      // Cliente só pode atualizar se:
+      //  - está autenticado e é o dono (ou está rotacionando o authUid)
+      //  - NÃO está alterando isPremium nem premiumSince
+      //  - aiCallsToday só pode subir em no máximo 1, OU ser zerado junto
+      //    com uma mudança de dateKey (reset diário)
+      allow update: if request.auth != null
+                    && (
+                         request.auth.uid == resource.data.authUid
+                         || request.resource.data.authUid == request.auth.uid
+                       )
+                    && request.resource.data.isPremium == resource.data.isPremium
+                    && request.resource.data.premiumSince == resource.data.premiumSince
+                    && (
+                         // Incremento normal (+1)
+                         (
+                           request.resource.data.aiCallsToday ==
+                             resource.data.aiCallsToday + 1
+                           && request.resource.data.dateKey ==
+                             resource.data.dateKey
+                         )
+                         // Reset diário: zera e muda dateKey
+                         || (
+                           request.resource.data.aiCallsToday == 0
+                           && request.resource.data.dateKey !=
+                             resource.data.dateKey
+                         )
+                         // Reset diário incrementando direto pra 1
+                         || (
+                           request.resource.data.aiCallsToday == 1
+                           && request.resource.data.dateKey !=
+                             resource.data.dateKey
+                         )
+                         // Apenas atualização de metadados (authUid rotate)
+                         || (
+                           request.resource.data.aiCallsToday ==
+                             resource.data.aiCallsToday
+                           && request.resource.data.dateKey ==
+                             resource.data.dateKey
+                         )
+                       );
+
+      // --- DELETE ---
+      allow delete: if false;
+    }
+
+    // Bloqueia qualquer outra coleção por padrão.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

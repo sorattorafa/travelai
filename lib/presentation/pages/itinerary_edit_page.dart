@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../core/route_optimizer.dart';
 import '../../core/theme/app_colors.dart';
 import '../../domain/entities/itinerary_entity.dart';
+import '../../l10n/app_localizations.dart';
 import '../providers/travel_provider.dart';
 
 /// Tela de edi\u00e7\u00e3o do roteiro. Permite reordenar passeios via long-press +
@@ -31,8 +32,9 @@ class _ItineraryEditPageState extends State<ItineraryEditPage> {
   /// Flutter's ReorderableListView passes indexes; refei\u00e7\u00f5es s\u00e3o fixas,
   /// ent\u00e3o interceptamos pra n\u00e3o deixar o usu\u00e1rio desloc\u00e1-las.
   void _onReorder(int oldIdx, int newIdx) {
+    final t = AppLocalizations.of(context);
     if (_steps[oldIdx].isFixed) {
-      _showSnack('Refei\u00e7\u00f5es ficam fixas no hor\u00e1rio.');
+      _showSnack(t.mealsAreFixed);
       return;
     }
     var targetIdx = newIdx > oldIdx ? newIdx - 1 : newIdx;
@@ -42,7 +44,7 @@ class _ItineraryEditPageState extends State<ItineraryEditPage> {
       // Se caiu em cima de uma refei\u00e7\u00e3o, realoca pro slot adjacente v\u00e1lido.
       targetIdx = _nearestMovableSlot(targetIdx, oldIdx);
       if (targetIdx < 0) {
-        _showSnack('N\u00e3o h\u00e1 espa\u00e7o dispon\u00edvel nesse hor\u00e1rio.');
+        _showSnack(t.noFreeSlot);
         return;
       }
     }
@@ -82,9 +84,10 @@ class _ItineraryEditPageState extends State<ItineraryEditPage> {
     final meters = RouteOptimizer.totalRouteMeters(optimized);
     if (!mounted) return;
     final km = (meters / 1000).toStringAsFixed(1);
+    final t = AppLocalizations.of(context);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Rota otimizada \u2014 $km km no total'),
+        content: Text(t.routeOptimized(km)),
         behavior: SnackBarBehavior.floating,
         backgroundColor: AppColors.indigo,
         duration: const Duration(seconds: 2),
@@ -95,19 +98,20 @@ class _ItineraryEditPageState extends State<ItineraryEditPage> {
 
   Future<bool> _confirmLeave() async {
     if (!_dirty) return true;
+    final t = AppLocalizations.of(context);
     final leave = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Descartar altera\u00e7\u00f5es?'),
-        content: const Text('Voc\u00ea reordenou o roteiro mas n\u00e3o salvou.'),
+        title: Text(t.discardChanges),
+        content: Text(t.discardChangesBody),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(false),
-            child: const Text('Cancelar'),
+            child: Text(t.cancel),
           ),
           FilledButton(
             onPressed: () => Navigator.of(ctx).pop(true),
-            child: const Text('Descartar'),
+            child: Text(t.discard),
           ),
         ],
       ),
@@ -128,14 +132,14 @@ class _ItineraryEditPageState extends State<ItineraryEditPage> {
       child: Scaffold(
         backgroundColor: AppColors.cream,
         appBar: AppBar(
-          title: const Text('Editar roteiro'),
+          title: Text(AppLocalizations.of(context).editItinerary),
           actions: [
             if (_dirty)
               TextButton(
                 onPressed: _save,
-                child: const Text(
-                  'SALVAR',
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context).save,
+                  style: const TextStyle(
                     color: AppColors.indigo,
                     fontWeight: FontWeight.bold,
                   ),
@@ -155,7 +159,7 @@ class _ItineraryEditPageState extends State<ItineraryEditPage> {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      'Segure e arraste para mover os passeios. Refei\u00e7\u00f5es ficam fixas.',
+                      AppLocalizations.of(context).dragToMove,
                       style: TextStyle(
                         fontSize: 12,
                         color: AppColors.slate.withValues(alpha: 0.8),

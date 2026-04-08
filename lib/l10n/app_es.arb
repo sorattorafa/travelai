@@ -1,0 +1,137 @@
+{
+  "@@locale": "es",
+  "appTitle": "GuIA",
+  "appTagline": "Tu guía inteligente de viajes",
+
+  "newSearch": "Nueva búsqueda",
+  "back": "Volver",
+  "tryAgain": "Intentar de nuevo",
+  "save": "GUARDAR",
+  "cancel": "Cancelar",
+  "discard": "Descartar",
+  "clear": "Limpiar",
+  "close": "Cerrar",
+  "edit": "Editar",
+  "ok": "OK",
+  "loading": "Cargando...",
+
+  "useMyLocation": "Usar mi ubicación",
+  "orChooseCity": "o elige una ciudad",
+  "cityHint": "Ej: París, Tokio, Nueva York...",
+  "explore": "Explorar ciudad",
+  "whereToToday": "¿Adónde vamos hoy?",
+  "useLocationOrCity": "Usa tu ubicación actual o elige una ciudad para explorar.",
+
+  "gettingLocation": "Obteniendo tu ubicación...",
+  "findingYouOnMap": "Encontrándote en el mapa...",
+
+  "loadingMsg1": "Abriendo el mapa de tu destino...",
+  "loadingMsg2": "Quitándole el polvo al mapa...",
+  "loadingMsg3": "Buscando las mejores rutas...",
+  "loadingMsg4": "Cazando los mejores viajes...",
+  "loadingMsg5": "Consultando guías locales...",
+  "loadingMsg6": "Preparando sugerencias increíbles para ti...",
+
+  "sectionItinerary": "Tu Itinerario",
+  "sectionTours": "Paseos",
+  "sectionRestaurants": "Restaurantes",
+  "sectionTips": "Consejos del Viajero",
+  "sectionInterests": "¿Qué te gusta hacer?",
+  "interestHint": "Ej: bici, sushi, senderismo...",
+
+  "createPersonalItinerary": "Crear Itinerario Personal",
+  "creatingItinerary": "Creando tu itinerario personal...",
+  "generateNewItinerary": "Generar nuevo itinerario",
+  "editItinerary": "Editar itinerario",
+  "discardChanges": "¿Descartar cambios?",
+  "discardChangesBody": "Reordenaste el itinerario pero no lo guardaste.",
+  "dragToMove": "Mantén pulsado y arrastra para mover los paseos. Las comidas quedan fijas.",
+  "mealsAreFixed": "Las comidas quedan fijas en su horario.",
+  "noFreeSlot": "No hay espacio disponible en ese horario.",
+  "routeOptimized": "Ruta optimizada — {km} km en total",
+  "@routeOptimized": {
+    "placeholders": { "km": { "type": "String" } }
+  },
+
+  "history": "Historial",
+  "historyTitle": "Historial",
+  "noCitiesYet": "Aún no hay ciudades visitadas",
+  "noItinerariesYet": "Aún no hay itinerarios generados",
+  "clearHistory": "Limpiar historial",
+  "confirmClearCities": "¿Borrar todo el historial de ciudades?",
+  "confirmClearItineraries": "¿Borrar todos los itinerarios guardados?",
+  "today": "Hoy",
+  "daysAgo": "hace {n} días",
+  "@daysAgo": {
+    "placeholders": { "n": { "type": "int" } }
+  },
+
+  "weatherNow": "Clima ahora",
+  "feelsLike": "Sensación {temp}°",
+  "@feelsLike": {
+    "placeholders": { "temp": { "type": "String" } }
+  },
+  "skyClear": "Cielo despejado",
+  "skyMostlyClear": "Mayormente despejado",
+  "skyPartlyCloudy": "Parcialmente nublado",
+  "skyCloudy": "Nublado",
+  "skyFog": "Niebla",
+  "skyDrizzle": "Llovizna",
+  "skyRain": "Lluvia",
+  "skySnow": "Nieve",
+  "skyShowers": "Chubascos",
+  "skyStorm": "Tormenta",
+
+  "openMapIn": "Abrir ruta en...",
+
+  "premiumTitle": "GuIA Premium",
+  "premiumSubtitle": "¡Suscríbete a GuIA Premium para explorar sin límites!",
+  "subscribeNow": "Suscribirme ahora",
+  "perMonth": "/mes",
+  "bestValue": "Mejor relación calidad-precio",
+  "featureUnlimitedSearches": "Búsquedas de ciudades ilimitadas",
+  "featureUnlimitedItineraries": "Itinerarios ilimitados por día",
+  "featureLoadMore": "Carga ilimitada de más resultados",
+  "featureSmartRoute": "Ruta inteligente con paseos y restaurantes",
+  "featureAllPlus": "Todo lo del plan Plus",
+  "termsOfUse": "Términos de uso",
+  "privacyPolicy": "Política de privacidad",
+  "autoRenewInfo": "Renovación automática. Cancela cuando quieras en los ajustes de la App Store.",
+  "subscriptionChargeInfo": "La suscripción se cargará a tu cuenta de Apple ID.",
+
+  "limitReached": "Alcanzaste el límite diario",
+  "limitReachedBody": "El plan gratuito permite {limit} {actionName} por día. ¡Suscríbete a GuIA Premium para explorar sin límites!",
+  "@limitReachedBody": {
+    "placeholders": {
+      "limit": { "type": "int" },
+      "actionName": { "type": "String" }
+    }
+  },
+  "actionAiCalls": "llamadas de IA",
+
+  "errorNoInternet": "Sin conexión a internet.",
+  "errorNeedsInternet": "Esta función necesita conexión a internet.",
+  "errorCheckConnection": "Comprueba tu conexión e inténtalo de nuevo.",
+  "errorTimeout": "La búsqueda tardó demasiado. Inténtalo de nuevo.",
+  "errorTimeoutNetwork": "La búsqueda tardó demasiado. Comprueba tu conexión e inténtalo de nuevo.",
+  "errorItineraryTimeout": "La creación del itinerario tardó demasiado. Inténtalo de nuevo.",
+  "errorEmptyResponse": "Respuesta vacía del servidor. Inténtalo de nuevo.",
+  "errorUnknown": "Error desconocido",
+  "errorLocationDenied": "Permiso de ubicación denegado.",
+  "errorLocationDeniedForever": "Permiso de ubicación denegado permanentemente. Actívalo en ajustes.",
+  "errorLocationDisabled": "Servicio de ubicación desactivado.",
+  "errorLocationFailed": "No se pudo obtener la dirección de tu ubicación.",
+  "errorCityNotFound": "Ciudad \"{city}\" no encontrada.",
+  "@errorCityNotFound": {
+    "placeholders": { "city": { "type": "String" } }
+  },
+  "errorEmptyCity": "El nombre de la ciudad no puede estar vacío.",
+  "errorBuyFailed": "Error al iniciar la compra.",
+  "errorRestoreFailed": "Error al restaurar las compras.",
+  "errorPurchase": "Error en la compra.",
+  "errorAppStore": "No se pudo conectar a la App Store.",
+  "errorPlansLoad": "No se pudieron cargar los planes.",
+  "errorValidatePurchase": "No se pudo validar tu compra. Intenta restaurar.",
+  "errorValidateUsage": "No se pudo validar tu uso. Inténtalo de nuevo.",
+  "errorIncompleteInit": "Inicialización incompleta. Reabre la app e inténtalo de nuevo."
+}

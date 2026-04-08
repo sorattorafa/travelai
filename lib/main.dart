@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'di/injection_container.dart';
+import 'l10n/app_localizations.dart';
 import 'presentation/pages/splash_page.dart';
 
 void main() async {
@@ -32,6 +34,26 @@ class GuIAApp extends StatelessWidget {
     return MaterialApp(
       title: 'GuIA',
       debugShowCheckedModeBanner: false,
+      // Internacionaliza\u00e7\u00e3o: detecta automaticamente o idioma do dispositivo
+      // entre pt-BR, en e es. Fallback pra portugu\u00eas se n\u00e3o for nenhum dos 3.
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('pt', 'BR'),
+        Locale('en'),
+        Locale('es'),
+      ],
+      localeResolutionCallback: (locale, supported) {
+        if (locale == null) return const Locale('pt', 'BR');
+        for (final s in supported) {
+          if (s.languageCode == locale.languageCode) return s;
+        }
+        return const Locale('pt', 'BR');
+      },
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: const Color(0xFF435892),

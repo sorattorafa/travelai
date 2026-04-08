@@ -27,17 +27,36 @@ class WeatherEntity {
     return Icons.thunderstorm_outlined;
   }
 
+  /// Chave sem\u00e2ntica do clima \u2014 a string final \u00e9 resolvida via AppLocalizations
+  /// no widget que exibe (cada idioma tem skyClear/skyRain/etc no .arb).
+  String get conditionKey {
+    if (weatherCode == 0) return 'skyClear';
+    if (weatherCode == 1) return 'skyMostlyClear';
+    if (weatherCode == 2) return 'skyPartlyCloudy';
+    if (weatherCode == 3) return 'skyCloudy';
+    if (weatherCode <= 48) return 'skyFog';
+    if (weatherCode <= 55) return 'skyDrizzle';
+    if (weatherCode <= 65) return 'skyRain';
+    if (weatherCode <= 77) return 'skySnow';
+    if (weatherCode <= 82) return 'skyShowers';
+    return 'skyStorm';
+  }
+
+  // Mantido por compatibilidade (ainda em portugu\u00eas) at\u00e9 todos os usos
+  // migrarem pra conditionKey + AppLocalizations no widget.
   String get condition {
-    if (weatherCode == 0) return 'Céu limpo';
-    if (weatherCode == 1) return 'Predominantemente limpo';
-    if (weatherCode == 2) return 'Parcialmente nublado';
-    if (weatherCode == 3) return 'Nublado';
-    if (weatherCode <= 48) return 'Neblina';
-    if (weatherCode <= 55) return 'Chuvisco';
-    if (weatherCode <= 65) return 'Chuva';
-    if (weatherCode <= 77) return 'Neve';
-    if (weatherCode <= 82) return 'Pancadas de chuva';
-    return 'Tempestade';
+    switch (conditionKey) {
+      case 'skyClear': return 'Céu limpo';
+      case 'skyMostlyClear': return 'Predominantemente limpo';
+      case 'skyPartlyCloudy': return 'Parcialmente nublado';
+      case 'skyCloudy': return 'Nublado';
+      case 'skyFog': return 'Neblina';
+      case 'skyDrizzle': return 'Chuvisco';
+      case 'skyRain': return 'Chuva';
+      case 'skySnow': return 'Neve';
+      case 'skyShowers': return 'Pancadas de chuva';
+      default: return 'Tempestade';
+    }
   }
 
   String get clothingTip {

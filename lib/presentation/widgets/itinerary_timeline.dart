@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../domain/entities/itinerary_entity.dart';
 import '../../core/map_launcher.dart';
+import '../../l10n/app_localizations.dart';
 
 class ItineraryTimeline extends StatelessWidget {
   final Itinerary itinerary;
@@ -77,7 +78,7 @@ class ItineraryTimeline extends StatelessWidget {
             child: OutlinedButton.icon(
               onPressed: onEdit,
               icon: const Icon(Icons.edit_outlined, size: 16),
-              label: const Text('Editar'),
+              label: Text(AppLocalizations.of(context).edit),
               style: OutlinedButton.styleFrom(
                 foregroundColor: const Color(0xFF435892),
                 side: const BorderSide(

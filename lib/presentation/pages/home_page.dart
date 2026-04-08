@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../providers/travel_provider.dart';
 import '../widgets/loading_indicator.dart';
 import '../widgets/tour_card.dart';
@@ -127,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'Seu guia inteligente de viagens',
+                            AppLocalizations.of(context).appTagline,
                             style: TextStyle(
                                 fontSize: 15, color: Colors.grey[500]),
                           ),
@@ -139,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                           left: 0,
                           top: -2,
                           child: IconButton(
-                            tooltip: 'Nova busca',
+                            tooltip: AppLocalizations.of(context).newSearch,
                             onPressed: () => provider.reset(),
                             icon: const Icon(
                               Icons.arrow_back,
@@ -157,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             IconButton(
-                              tooltip: 'Histórico',
+                              tooltip: AppLocalizations.of(context).history,
                               onPressed: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -591,10 +592,10 @@ class _HomePageState extends State<HomePage> {
           children: [
             const Icon(Icons.interests_outlined, size: 22, color: Color(0xFF435892)),
             const SizedBox(width: 8),
-            const Expanded(
+            Expanded(
               child: Text(
-                'O que você gosta de fazer?',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                AppLocalizations.of(context).sectionInterests,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
             if (provider.currentInterest != null)
@@ -985,7 +986,7 @@ class _HomePageState extends State<HomePage> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const _SectionTitle(icon: Icons.map_outlined, title: 'Seu Roteiro'),
+          _SectionTitle(icon: Icons.map_outlined, title: AppLocalizations.of(context).sectionItinerary),
           const SizedBox(height: 12),
           ItineraryTimeline(
             itinerary: provider.itinerary!,

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../providers/travel_provider.dart';
 
 class LoadingIndicator extends StatefulWidget {
@@ -13,30 +14,25 @@ class LoadingIndicator extends StatefulWidget {
 
 class _LoadingIndicatorState extends State<LoadingIndicator>
     with SingleTickerProviderStateMixin {
-  static const _locationMessages = [
-    'Obtendo sua localização...',
-    'Ligando o GPS...',
-    'Encontrando você no mapa...',
-  ];
-
-  static const _suggestionMessages = [
-    'Abrindo o mapa do seu destino...',
-    'Tirando a poeira do mapa...',
-    'Buscando os melhores roteiros...',
-    'Garimpando as melhores viagens...',
-    'Consultando guias locais...',
-    'Preparando sugestões incríveis para você...',
-  ];
-
   late AnimationController _controller;
   late Animation<double> _fadeAnim;
   int _index = 0;
   Timer? _timer;
 
-  List<String> get _messages =>
-      widget.status == TravelStatus.loadingLocation
-          ? _locationMessages
-          : _suggestionMessages;
+  List<String> _messagesFor(BuildContext context) {
+    final t = AppLocalizations.of(context);
+    if (widget.status == TravelStatus.loadingLocation) {
+      return [t.gettingLocation, t.findingYouOnMap];
+    }
+    return [
+      t.loadingMsg1,
+      t.loadingMsg2,
+      t.loadingMsg3,
+      t.loadingMsg4,
+      t.loadingMsg5,
+      t.loadingMsg6,
+    ];
+  }
 
   @override
   void initState() {
@@ -55,8 +51,9 @@ class _LoadingIndicatorState extends State<LoadingIndicator>
       if (!mounted) return;
       _controller.reverse().then((_) {
         if (!mounted) return;
+        final len = _messagesFor(context).length;
         setState(() {
-          _index = (_index + 1) % _messages.length;
+          _index = (_index + 1) % len;
         });
         _controller.forward();
       });
@@ -94,7 +91,7 @@ class _LoadingIndicatorState extends State<LoadingIndicator>
             FadeTransition(
               opacity: _fadeAnim,
               child: Text(
-                _messages[_index],
+                _messagesFor(context)[_index.clamp(0, _messagesFor(context).length - 1)],
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 16,

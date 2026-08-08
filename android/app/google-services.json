@@ -26,6 +26,25 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:105539619329:android:8661990ac008c55add4e00",
+        "android_client_info": {
+          "package_name": "com.sorattodev.guia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHsKTimLsrLEcKg9wXCmNr2GEJS3F7ONg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:105539619329:android:295c0265c243e254dd4e00",
         "android_client_info": {
           "package_name": "com.sorattodev.nanovideo"

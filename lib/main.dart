@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'firebase_options.dart';
 import 'di/injection_container.dart';
 import 'l10n/app_localizations.dart';
@@ -13,6 +15,24 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  // App Check: obrigatório agora que o enforce está ativo na API do AI Logic.
+  // Em release usa App Attest (iOS 14+) com fallback pra DeviceCheck.
+  // Em debug usa o provider de depuração — o token aparece no console do Xcode
+  // e precisa ser registrado em Firebase > App Check > Apps > travelai (ios)
+  // > ⋮ > "Gerenciar tokens de depuração".
+  try {
+    await FirebaseAppCheck.instance.activate(
+      appleProvider: kDebugMode
+          ? AppleProvider.debug
+          : AppleProvider.appAttestWithDeviceCheckFallback,
+      androidProvider:
+          kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
+    );
+  } catch (_) {
+    // Falha na ativação não deve derrubar o boot; as chamadas de IA
+    // simplesmente serão recusadas pelo backend sem token válido.
+  }
 
   final di = InjectionContainer();
   // Inicializa device identity + anon auth + sync Firestore antes do app subir.

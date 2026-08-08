@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.travelai</string>
+	<string>com.sorattodev.guia</string>
 	<key>PROJECT_ID</key>
 	<string>videomax-1e299</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:105539619329:ios:e4fa37fbad1ac29cdd4e00</string>
+	<string>1:105539619329:ios:fceafeba6dd78d23dd4e00</string>
 </dict>
 </plist>

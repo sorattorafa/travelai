@@ -42,38 +42,36 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyBOeYt03xzQG_MhbBgy18kjJ4ey3Nhvt3w',
-    appId: '1:105539619329:web:8d207f477a4fc984dd4e00',
+    appId: '1:105539619329:web:55b2ffd358f54538dd4e00',
     messagingSenderId: '105539619329',
     projectId: 'videomax-1e299',
     authDomain: 'videomax-1e299.firebaseapp.com',
     storageBucket: 'videomax-1e299.firebasestorage.app',
-    measurementId: 'G-5JG9QCWPMF',
+    measurementId: 'G-71QY9QM7QE',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCHsKTimLsrLEcKg9wXCmNr2GEJS3F7ONg',
-    appId: '1:105539619329:android:f4d706140d2d5bf6dd4e00',
+    appId: '1:105539619329:android:8661990ac008c55add4e00',
     messagingSenderId: '105539619329',
     projectId: 'videomax-1e299',
     storageBucket: 'videomax-1e299.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAJnHJMGA384tDf3afZTnY0v9KzRt81GIo',
-    appId: '1:105539619329:ios:e4fa37fbad1ac29cdd4e00',
+    appId: '1:105539619329:ios:fceafeba6dd78d23dd4e00',
     messagingSenderId: '105539619329',
     projectId: 'videomax-1e299',
     storageBucket: 'videomax-1e299.firebasestorage.app',
-    iosBundleId: 'com.example.travelai',
+    iosBundleId: 'com.sorattodev.guia',
   );
-
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyAJnHJMGA384tDf3afZTnY0v9KzRt81GIo',
-    appId: '1:105539619329:ios:e4fa37fbad1ac29cdd4e00',
+    appId: '1:105539619329:ios:fceafeba6dd78d23dd4e00',
     messagingSenderId: '105539619329',
     projectId: 'videomax-1e299',
     storageBucket: 'videomax-1e299.firebasestorage.app',
-    iosBundleId: 'com.example.travelai',
+    iosBundleId: 'com.sorattodev.guia',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
@@ -85,5 +83,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'videomax-1e299.firebasestorage.app',
     measurementId: 'G-71QY9QM7QE',
   );
-
 }
